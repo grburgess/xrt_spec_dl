@@ -1,0 +1,2 @@
+include versioneer.py
+include xrt_spec_dl/_version.py
