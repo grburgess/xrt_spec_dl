@@ -45,7 +45,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/docs.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/API.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/API.html#astromodels">astromodels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/API.html#xrt-spec-dl">xrt_spec_dl</a></li>
 </ul>
 
         </div>
@@ -90,10 +90,32 @@
            <div itemprop="articleBody">
              
   <h1>Source code for xrt_spec_dl.lightcurve</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">astropy.io.ascii</span> <span class="kn">import</span> <span class="n">QDP</span>
 <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+
+
+
+<div class="viewcode-block" id="check"><a class="viewcode-back" href="../../notebooks/api/xrt_spec_dl.html#xrt_spec_dl.lightcurve.check">[docs]</a><span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="s2">&quot;! pc data&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+
+        <span class="k">return</span> <span class="s2">&quot;pc&quot;</span>
+
+    <span class="k">elif</span> <span class="s2">&quot;! pc upper limits&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+
+        <span class="k">return</span> <span class="s2">&quot;skip&quot;</span>
+
+    <span class="k">elif</span> <span class="s2">&quot;! wt data&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+
+        <span class="k">return</span> <span class="s2">&quot;wt&quot;</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="kc">None</span></div>
+
 
 
 <div class="viewcode-block" id="XRTLightCurve"><a class="viewcode-back" href="../../notebooks/api/xrt_spec_dl.html#xrt_spec_dl.lightcurve.XRTLightCurve">[docs]</a><span class="k">class</span> <span class="nc">XRTLightCurve</span><span class="p">:</span>
@@ -110,17 +132,50 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="s2">&quot;bkg&quot;</span><span class="p">,</span> <span class="s2">&quot;fracexp&quot;</span><span class="p">]</span>
 
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">QDP</span><span class="p">(</span><span class="n">table_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_wt_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;https://www.swift.ac.uk/xrt_curves/</span><span class="si">{</span><span class="n">obs_id</span><span class="si">}</span><span class="s2">/curve2_incbad.qdp&quot;</span>
-        <span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.swift.ac.uk/xrt_curves/</span><span class="si">{</span><span class="n">obs_id</span><span class="si">}</span><span class="s2">/curve2_incbad.qdp&quot;</span>
 
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">QDP</span><span class="p">(</span><span class="n">table_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pc_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;https://www.swift.ac.uk/xrt_curves/</span><span class="si">{</span><span class="n">obs_id</span><span class="si">}</span><span class="s2">/curve2_incbad.qdp&quot;</span>
-        <span class="p">)</span></div>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">check</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tmp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+                <span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">wt_idx</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;wt&quot;</span><span class="p">)</span>
+
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">QDP</span><span class="p">(</span><span class="n">table_id</span><span class="o">=</span><span class="n">wt_idx</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wt_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;https://www.swift.ac.uk/xrt_curves/</span><span class="si">{</span><span class="n">obs_id</span><span class="si">}</span><span class="s2">/curve2_incbad.qdp&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_wt_table</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">pc_idx</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;pc&quot;</span><span class="p">)</span>
+
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">QDP</span><span class="p">(</span><span class="n">table_id</span><span class="o">=</span><span class="n">pc_idx</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pc_table</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;https://www.swift.ac.uk/xrt_curves/</span><span class="si">{</span><span class="n">obs_id</span><span class="si">}</span><span class="s2">/curve2_incbad.qdp&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pc_table</span> <span class="o">=</span> <span class="kc">None</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">pc_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Table</span><span class="p">:</span>
@@ -168,13 +223,13 @@
 
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">pc_mode</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pc_mode</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pc_table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_plot_data</span><span class="p">(</span>
                 <span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pc_table</span><span class="p">,</span> <span class="n">pc_color</span><span class="p">,</span> <span class="n">with_err</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PC&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">wt_mode</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">wt_mode</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wt_table</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_plot_data</span><span class="p">(</span>
                 <span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wt_table</span><span class="p">,</span> <span class="n">wt_color</span><span class="p">,</span> <span class="n">with_err</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;WT&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
