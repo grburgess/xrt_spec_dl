@@ -5,9 +5,6 @@ from glob import glob
 from pathlib import Path
 
 import pytest
-from xrt_spec_dl.utils.package_utils import get_path_of_data_file
-
-
 
 @pytest.fixture(scope="session")
 def thing():
