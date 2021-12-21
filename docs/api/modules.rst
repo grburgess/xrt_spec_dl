@@ -1,4 +1,4 @@
-astromodels
+xrt_spec_dl
 ===========
 
 .. toctree::

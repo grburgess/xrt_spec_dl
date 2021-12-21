@@ -1,7 +1,29 @@
+import urllib
 import matplotlib.pyplot as plt
 
 from astropy.io.ascii import QDP
 from astropy.table import Table
+
+
+
+def check(line):
+
+    if "! pc data" in line.decode().lower():
+
+        return "pc"
+
+    elif "! pc upper limits" in line.decode().lower():
+
+        return "skip"
+
+    elif "! wt data" in line.decode().lower():
+
+        return "wt"
+
+    else:
+
+        None
+
 
 
 class XRTLightCurve:
@@ -18,17 +40,50 @@ class XRTLightCurve:
         """
         names = ["time", "rate", "bkg", "fracexp"]
 
-        tmp = QDP(table_id=0, names=names)
+        tables = []
 
-        self._wt_table: Table = tmp.read(
-            f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
-        )
+        url = f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
 
-        tmp = QDP(table_id=1, names=names)
+        data = urllib.request.urlopen(url)
+        for line in data:
 
-        self._pc_table: Table = tmp.read(
-            f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
-        )
+            tmp = check(line)
+
+            if tmp is not None:
+
+                tables.append(tmp)
+
+
+
+        try:
+
+            wt_idx = tables.index("wt")
+
+            tmp = QDP(table_id=wt_idx, names=names)
+
+            self._wt_table: Table = tmp.read(
+                f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
+            )
+
+        except ValueError:
+
+
+            self._wt_table = None
+
+        try:
+
+            pc_idx = tables.index("pc")
+
+            tmp = QDP(table_id=pc_idx, names=names)
+
+            self._pc_table: Table = tmp.read(
+                f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
+            )
+
+        except ValueError:
+
+
+            self._pc_table = None
 
     @property
     def pc_data(self) -> Table:
@@ -76,13 +131,13 @@ class XRTLightCurve:
 
         fig, ax = plt.subplots()
 
-        if pc_mode:
+        if pc_mode and self._pc_table is not None :
 
             self._plot_data(
                 ax, self._pc_table, pc_color, with_err, label="PC", **kwargs
             )
 
-        if wt_mode:
+        if wt_mode and self._wt_table is not None:
 
             self._plot_data(
                 ax, self._wt_table, wt_color, with_err, label="WT", **kwargs
