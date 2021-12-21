@@ -1,0 +1,37 @@
+xrt\_spec\_dl.utils package
+===========================
+
+Submodules
+----------
+
+xrt\_spec\_dl.utils.file\_utils module
+--------------------------------------
+
+.. automodule:: xrt_spec_dl.utils.file_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+xrt\_spec\_dl.utils.logging module
+----------------------------------
+
+.. automodule:: xrt_spec_dl.utils.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+xrt\_spec\_dl.utils.package\_data module
+----------------------------------------
+
+.. automodule:: xrt_spec_dl.utils.package_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: xrt_spec_dl.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

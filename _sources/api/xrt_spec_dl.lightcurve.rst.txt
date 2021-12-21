@@ -1,0 +1,7 @@
+xrt_spec_dl.lightcurve module
+=============================
+
+.. automodule:: xrt_spec_dl.lightcurve
+    :members:
+    :undoc-members:
+    :show-inheritance:

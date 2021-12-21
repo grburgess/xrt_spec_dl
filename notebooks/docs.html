@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro &mdash; xrt_spec_dl  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API" href="../api/API.html" />
+    <link rel="prev" title="Welcome to xrt_spec_dl’s documentation!" href="../index.html" />
+  <link rel="stylesheet" href="../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> xrt_spec_dl
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Intro</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Downloading-Spectra">Downloading Spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Downloading-Light-curves">Downloading Light curves</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/API.html#astromodels">astromodels</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">xrt_spec_dl</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Intro</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Intro">
+<h1>Intro<a class="headerlink" href="#Intro" title="Permalink to this headline"></a></h1>
+<p>This is a simple tool to allow scripting of the awesome <a class="reference external" href="https://www.swift.ac.uk/xrt_products/index.php">XRT website</a>. The official API (which does a lot more) can be found <a class="reference external" href="https://www.swift.ac.uk/user_objects/API/">here</a>.</p>
+<p>These tools extend the functionality a bit.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>%matplotlib inline
+
+from xrt_spec_dl import XRTLightCurve, download_xrt_spectral_data
+</pre></div>
+</div>
+</div>
+<section id="Downloading-Spectra">
+<h2>Downloading Spectra<a class="headerlink" href="#Downloading-Spectra" title="Permalink to this headline"></a></h2>
+<p>This allows you to download time-sliced spectra for spectral analysis. You can choose PC or WT mode.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>obs_id = &quot;01071993&quot;
+
+grb = &quot;210905A&quot;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>download_xrt_spectral_data(
+    obs_id=obs_id,
+    name=f&quot;GRB {grb}&quot;,
+    mode=&quot;PC&quot;,
+    tstart=239,
+    tstop=446,
+    destination_dir=&quot;.&quot;,
+)
+
+
+!ls
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> requesting build...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> requesting https://www.swift.ac.uk/xrt_spectra/tprods/SLICE_01071993_20.114.193.166_ChTW7PJz3/ ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> sleeping 30 seconds ...</span>
+[<span class="ansi-green-fg">INFO    </span>]<span class="ansi-green-fg"> downloading: https://www.swift.ac.uk/xrt_spectra/tprods/SLICE_01071993_20.114.193.166_ChTW7PJz3/xrt.tar.gz</span>
+GRB_info.txt  _stub    apc.arf  apc.rmf      apcback.pi    docs.md  xrt.tar.gz
+README.txt    a.areas  apc.pi   apc_fit.fit  apcsource.pi  models
+</pre></div></div>
+</div>
+</section>
+<section id="Downloading-Light-curves">
+<h2>Downloading Light curves<a class="headerlink" href="#Downloading-Light-curves" title="Permalink to this headline"></a></h2>
+<p>To get the light curve data for plotting purposes, we need to know the obs_id of the GRB. the class will look at the Swift data online and pull it for making plots. In the future, a cache options will be included for off-line use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>lc = XRTLightCurve(obs_id=obs_id)
+</pre></div>
+</div>
+</div>
+<p>The WT and PC data exist as astropy tables.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>lc.wt_data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><i>Table length=144</i>
+<table id="table139815364685248" class="table-striped table-bordered table-condensed">
+<thead><tr><th>time</th><th>time_perr</th><th>time_nerr</th><th>rate</th><th>rate_perr</th><th>rate_nerr</th><th>bkg</th><th>bkg_err</th><th>fracexp</th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>98.6</td><td>0.494</td><td>-0.587</td><td>46.12369</td><td>6.87576</td><td>-6.876381</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>99.793</td><td>0.649</td><td>-0.699</td><td>37.26021</td><td>5.603942</td><td>-5.604468</td><td>0.5035006</td><td>0.5035006</td><td>1.0</td></tr>
+<tr><td>101.143</td><td>0.645</td><td>-0.7</td><td>36.53476</td><td>5.55801</td><td>-5.558484</td><td>0.5048367</td><td>0.5048367</td><td>1.0</td></tr>
+<tr><td>102.437</td><td>0.689</td><td>-0.649</td><td>37.29176</td><td>5.559158</td><td>-5.559588</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>103.504</td><td>0.48</td><td>-0.379</td><td>58.05943</td><td>8.655026</td><td>-8.655572</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>104.747</td><td>0.522</td><td>-0.763</td><td>38.841</td><td>5.790096</td><td>-5.790403</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>106.056</td><td>0.701</td><td>-0.787</td><td>33.54494</td><td>5.000598</td><td>-5.000809</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>107.234</td><td>0.497</td><td>-0.478</td><td>49.62938</td><td>7.706306</td><td>-7.706513</td><td>1.392896</td><td>0.984926</td><td>1.0</td></tr>
+<tr><td>108.318</td><td>0.716</td><td>-0.586</td><td>38.25407</td><td>5.702591</td><td>-5.702744</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>109.571</td><td>0.641</td><td>-0.537</td><td>40.87582</td><td>6.347078</td><td>-6.34723</td><td>1.15304</td><td>0.8153224</td><td>1.0</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>402.092</td><td>0.367</td><td>-0.343</td><td>69.74111</td><td>10.3964</td><td>-10.39647</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>402.756</td><td>0.357</td><td>-0.298</td><td>75.61507</td><td>11.27204</td><td>-11.27211</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>403.503</td><td>0.498</td><td>-0.39</td><td>54.92238</td><td>8.355262</td><td>-8.355314</td><td>0.7648364</td><td>0.7648364</td><td>1.0</td></tr>
+<tr><td>404.439</td><td>0.381</td><td>-0.438</td><td>60.49167</td><td>9.017574</td><td>-9.017632</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>405.171</td><td>0.338</td><td>-0.352</td><td>70.6357</td><td>10.74571</td><td>-10.74577</td><td>0.9836565</td><td>0.9836565</td><td>1.0</td></tr>
+<tr><td>405.8</td><td>0.315</td><td>-0.29</td><td>81.84292</td><td>12.20043</td><td>-12.20051</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>406.683</td><td>0.371</td><td>-0.568</td><td>52.70102</td><td>7.856212</td><td>-7.856261</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>407.448</td><td>0.306</td><td>-0.395</td><td>70.62479</td><td>10.52813</td><td>-10.5282</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>408.24</td><td>0.547</td><td>-0.485</td><td>47.25271</td><td>7.188487</td><td>-7.188536</td><td>0.6580304</td><td>0.6580304</td><td>1.0</td></tr>
+<tr><td>409.253</td><td>0.494</td><td>-0.466</td><td>51.53035</td><td>7.681699</td><td>-7.681759</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+</table></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>lc.pc_data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><i>Table length=46</i>
+<table id="table139816219156144" class="table-striped table-bordered table-condensed">
+<thead><tr><th>time</th><th>time_perr</th><th>time_nerr</th><th>rate</th><th>rate_perr</th><th>rate_nerr</th><th>bkg</th><th>bkg_err</th><th>fracexp</th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>257.813</td><td>11.352</td><td>-8.706</td><td>4.372901</td><td>0.9596635</td><td>-0.9596635</td><td>0.00582634</td><td>0.00291317</td><td>1.0</td></tr>
+<tr><td>279.741</td><td>9.483</td><td>-10.576</td><td>4.819593</td><td>1.008855</td><td>-1.008855</td><td>0.004369748</td><td>0.002522875</td><td>1.0</td></tr>
+<tr><td>297.701</td><td>9.074</td><td>-8.477</td><td>4.815297</td><td>1.076733</td><td>-1.076733</td><td>0.0</td><td>0.0</td><td>1.0</td></tr>
+<tr><td>315.513</td><td>8.813</td><td>-8.738</td><td>4.834247</td><td>1.084184</td><td>-1.084184</td><td>0.003329336</td><td>0.002354196</td><td>1.0</td></tr>
+<tr><td>332.385</td><td>4.478</td><td>-8.059</td><td>8.449322</td><td>1.697917</td><td>-1.697917</td><td>0.009322149</td><td>0.004661075</td><td>1.0</td></tr>
+<tr><td>342.069</td><td>4.822</td><td>-5.207</td><td>18.21536</td><td>2.789353</td><td>-2.789353</td><td>0.01748003</td><td>0.007136194</td><td>1.0</td></tr>
+<tr><td>3826.069</td><td>53.282</td><td>-44.503</td><td>0.4401046</td><td>0.09935974</td><td>-0.09935974</td><td>0.00193411</td><td>0.0006447033</td><td>1.0</td></tr>
+<tr><td>3927.847</td><td>66.841</td><td>-48.496</td><td>0.3732826</td><td>0.08436416</td><td>-0.08436416</td><td>0.001821987</td><td>0.0005761628</td><td>1.0</td></tr>
+<tr><td>4028.385</td><td>18.957</td><td>-33.697</td><td>0.8747612</td><td>0.1912754</td><td>-0.1912754</td><td>0.0007982025</td><td>0.0005644144</td><td>1.0</td></tr>
+<tr><td>4101.667</td><td>40.954</td><td>-54.324</td><td>0.4606588</td><td>0.1038888</td><td>-0.1038888</td><td>0.001764449</td><td>0.000623827</td><td>1.0</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>211078.674</td><td>12890.825</td><td>-23281.86</td><td>0.01366263</td><td>0.00278666</td><td>-0.00278666</td><td>0.0005820454</td><td>4.399849e-05</td><td>0.072087</td></tr>
+<tr><td>308026.999</td><td>18423.279</td><td>-40412.385</td><td>0.01324905</td><td>0.002303208</td><td>-0.002303208</td><td>0.0004166289</td><td>2.93139e-05</td><td>0.060386</td></tr>
+<tr><td>393391.557</td><td>12736.906</td><td>-5542.598</td><td>0.01059567</td><td>0.002160675</td><td>-0.002160675</td><td>0.0004718114</td><td>3.058299e-05</td><td>0.175571</td></tr>
+<tr><td>529458.552</td><td>38371.242</td><td>-26029.145</td><td>0.007084353</td><td>0.001486265</td><td>-0.001486265</td><td>0.0004642947</td><td>2.478222e-05</td><td>0.07444</td></tr>
+<tr><td>622744.928</td><td>52784.773</td><td>-27164.118</td><td>0.005327311</td><td>0.001427881</td><td>-0.001427881</td><td>0.0002677566</td><td>1.696839e-05</td><td>0.050178</td></tr>
+<tr><td>754403.214</td><td>59127.104</td><td>-27683.452</td><td>0.006130641</td><td>0.001000429</td><td>-0.001000429</td><td>0.0002468515</td><td>1.064253e-05</td><td>0.106461</td></tr>
+<tr><td>896943.44</td><td>14565.847</td><td>-9651.432</td><td>0.005536728</td><td>0.001371721</td><td>-0.001371721</td><td>0.0001883713</td><td>1.215932e-05</td><td>0.191537</td></tr>
+<tr><td>1138445.996</td><td>42882.962</td><td>-61848.181</td><td>0.003389486</td><td>0.0007969945</td><td>-0.0007969945</td><td>0.0005433904</td><td>1.888412e-05</td><td>0.085922</td></tr>
+<tr><td>1418780.46</td><td>352287.473</td><td>-181877.223</td><td>0.003075002</td><td>0.0005201644</td><td>-0.0005201644</td><td>0.0003124656</td><td>7.748934e-06</td><td>0.03871</td></tr>
+<tr><td>2570092.604</td><td>1007877.584</td><td>-272644.863</td><td>0.0006538729</td><td>0.0002275809</td><td>-0.0002275809</td><td>0.0001492451</td><td>3.738143e-06</td><td>0.020244</td></tr>
+</table></div></div>
+</div>
+<p>Finally, we can plot the data</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>lc.plot(pc_mode=True, wt_mode=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_docs_11_0.png" src="../_images/notebooks_docs_11_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_docs_11_1.png" src="../_images/notebooks_docs_11_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to xrt_spec_dl’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api/API.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

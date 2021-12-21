@@ -1,0 +1,7 @@
+xrt_spec_dl.utils.logging module
+================================
+
+.. automodule:: xrt_spec_dl.utils.logging
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,27 @@
+xrt_spec_dl package
+===================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    xrt_spec_dl.data
+    xrt_spec_dl.io
+    xrt_spec_dl.utils
+
+Submodules
+----------
+
+.. toctree::
+
+   xrt_spec_dl.lightcurve
+   xrt_spec_dl.xrt_spec_dl
+
+Module contents
+---------------
+
+.. automodule:: xrt_spec_dl
+    :members:
+    :undoc-members:
+    :show-inheritance:

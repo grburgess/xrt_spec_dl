@@ -1,0 +1,19 @@
+xrt_spec_dl.utils package
+=========================
+
+Submodules
+----------
+
+.. toctree::
+
+   xrt_spec_dl.utils.file_utils
+   xrt_spec_dl.utils.logging
+   xrt_spec_dl.utils.package_data
+
+Module contents
+---------------
+
+.. automodule:: xrt_spec_dl.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
