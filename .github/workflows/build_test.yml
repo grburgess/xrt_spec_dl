@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade flake8 numpy ipython scipy h5py matplotlib coverage pytest pytest-cov cython codecov
-        pip install  astropy
+        pip install astropy
         python setup.py install
     - name: Lint with flake8
       run: |
