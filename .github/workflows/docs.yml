@@ -69,7 +69,7 @@ jobs:
           pip3 install -U sphinx nbsphinx sphinx-gallery
           
           
-          sphinx-apidoc -f -o docs/api/ rball
+          sphinx-apidoc -f -o docs/api/ xrt_spec_dl
 
 
       - uses: actions/upload-artifact@v2

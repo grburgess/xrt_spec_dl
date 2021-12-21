@@ -40,14 +40,21 @@ class XRTLightCurve:
 
     @staticmethod
     def _plot_data(
-        ax: plt.Axes, data: Table, color: str, with_err: bool = False, **kwargs
+        ax: plt.Axes,
+        data: Table,
+        color: str,
+        with_err: bool = False,
+        label="",
+        **kwargs,
     ) -> None:
 
         time_down = data["time"] + data["time_nerr"]
 
         time_up = data["time"] + data["time_perr"]
 
-        ax.hlines(data["rate"], time_down, time_up, color=color, **kwargs)
+        ax.hlines(
+            data["rate"], time_down, time_up, color=color, label=label, **kwargs
+        )
 
         if with_err:
 
@@ -71,12 +78,18 @@ class XRTLightCurve:
 
         if pc_mode:
 
-            self._plot_data(ax, self._pc_table, pc_color, with_err, **kwargs)
+            self._plot_data(
+                ax, self._pc_table, pc_color, with_err, label="PC", **kwargs
+            )
 
         if wt_mode:
 
-            self._plot_data(ax, self._wt_table, wt_color, with_err, **kwargs)
+            self._plot_data(
+                ax, self._wt_table, wt_color, with_err, label="WT", **kwargs
+            )
 
         ax.set(xscale="log", yscale="log", ylabel="count rate", xlabel="time")
+
+        ax.legend()
 
         return fig
