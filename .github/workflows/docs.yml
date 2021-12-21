@@ -1,4 +1,4 @@
-bname: Docs
+name: Docs
 on: [push, release]
 
 jobs:
