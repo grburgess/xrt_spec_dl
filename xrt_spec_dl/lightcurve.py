@@ -1,12 +1,18 @@
 import urllib
+from typing import Optional
+
 import matplotlib.pyplot as plt
 
 from astropy.io.ascii import QDP
 from astropy.table import Table
 
+from xrt_spec_dl.utils.cache import check_cache
+
+from .utils import xrt_spec_dl_config
+from .utils.cache import check_cache, get_file_from_cache, store_file_in_cache
 
 
-def check(line):
+def check(line: str) -> Optional[str]:
 
     if "! pc data" in line.decode().lower():
 
@@ -25,7 +31,6 @@ def check(line):
         None
 
 
-
 class XRTLightCurve:
     def __init__(self, obs_id: str) -> None:
 
@@ -38,52 +43,75 @@ class XRTLightCurve:
         :returns:
 
         """
-        names = ["time", "rate", "bkg", "fracexp"]
 
-        tables = []
+        not_found: bool = True
 
-        url = f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
+        if xrt_spec_dl_config.use_cache:
 
-        data = urllib.request.urlopen(url)
-        for line in data:
+            if check_cache(obs_id):
 
-            tmp = check(line)
+                # the grb is in the cache
 
-            if tmp is not None:
+                self._wt_table = get_file_from_cache(obs_id, "wt")
 
-                tables.append(tmp)
+                self._pc_table = get_file_from_cache(obs_id, "pc")
 
+                not_found = False
 
+        if not_found:
 
-        try:
+            names = ["time", "rate", "bkg", "fracexp"]
 
-            wt_idx = tables.index("wt")
+            tables = []
 
-            tmp = QDP(table_id=wt_idx, names=names)
-
-            self._wt_table: Table = tmp.read(
+            url = (
                 f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
             )
 
-        except ValueError:
+            data = urllib.request.urlopen(url)
+            for line in data:
 
+                tmp = check(line)
 
-            self._wt_table = None
+                if tmp is not None:
 
-        try:
+                    tables.append(tmp)
 
-            pc_idx = tables.index("pc")
+            try:
 
-            tmp = QDP(table_id=pc_idx, names=names)
+                wt_idx = tables.index("wt")
 
-            self._pc_table: Table = tmp.read(
-                f"https://www.swift.ac.uk/xrt_curves/{obs_id}/curve2_incbad.qdp"
-            )
+                tmp = QDP(table_id=wt_idx, names=names)
 
-        except ValueError:
+                self._wt_table: Table = tmp.read(url)
 
+            except ValueError:
 
-            self._pc_table = None
+                self._wt_table = None
+
+            try:
+
+                pc_idx = tables.index("pc")
+
+                tmp = QDP(table_id=pc_idx, names=names)
+
+                self._pc_table: Table = tmp.read(url)
+
+            except ValueError:
+
+                self._pc_table = None
+
+            # now store in cache
+
+            if xrt_spec_dl_config.use_cache:
+
+                if self._wt_table is not None:
+
+                    store_file_in_cache(self._wt_table, obs_id, "wt")
+
+                if self._pc_table is not None:
+
+                    store_file_in_cache(self._pc_table, obs_id, "pc")
 
     @property
     def pc_data(self) -> Table:
@@ -131,7 +159,7 @@ class XRTLightCurve:
 
         fig, ax = plt.subplots()
 
-        if pc_mode and self._pc_table is not None :
+        if pc_mode and self._pc_table is not None:
 
             self._plot_data(
                 ax, self._pc_table, pc_color, with_err, label="PC", **kwargs

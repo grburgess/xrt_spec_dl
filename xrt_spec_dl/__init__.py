@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+
+from .utils import xrt_spec_dl_config
 from .xrt_spec_dl import download_xrt_spectral_data
 from .lightcurve import XRTLightCurve
 
